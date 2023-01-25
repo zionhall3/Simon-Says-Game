@@ -47,6 +47,14 @@ body {
   background-color: yellow;
 }
 
+.purple {
+  background-color: purple;
+}
+
+.black {
+  background-color: black;
+}
+
 /* Take a look inside the styles.css file, you can see there is a class called "pressed", it will add a box shadow and changes the background colour to grey. */
 .pressed {
   box-shadow: 0 0 20px white;

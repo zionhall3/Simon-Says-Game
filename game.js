@@ -1,5 +1,5 @@
 // At the top of the game.js file, create a new array called buttonColours and set it to hold the sequence "red", "blue", "green", "yellow" .
-const buttonColors = ["red", "blue", "green", "yellow"];
+const buttonColors = ["red", "blue", "green", "yellow", "purple", "black"];
 
 
 // At the top of the game.js file, create a new empty array called gamePattern.
@@ -73,15 +73,15 @@ function animatePress(currentColor) {
 }
 
 // Use jQuery to detect when a keyboard key has been pressed, when that happens for the first time, call nextSequence().
-$("body").keypress(function() {
-  
-  // You'll need a variable called started to toggle to true once the game starts and if it's true, then further key presses should not trigger nextSequence().
-  var started = true;
-  if (started){
-    nextSequence();
-
+$(document).keypress(function() {
+  if (!started){
+    
     // The h1 title starts out saying "Press A Key to Start", when the game has started, change this to say "Level 0".
     $("#level-title").text("Level " + level);
+    
+    nextSequence();
+    // You'll need a variable called started to toggle to true once the game starts and if it's true, then further key presses should not trigger nextSequence().
+    var started = true;
   }
 });
 
@@ -128,10 +128,17 @@ function checkAnswer(currentLevel){
 // Inside game.js create a new function called nextSequence()
 function nextSequence() {
   userClickedPattern = [];
+  
+  // Inside nextSequence(), increase the level by 1 every time nextSequence() is called.
+  level++;
+
+ 
+  // Was encountering a bug where the level text wasn't showing up properly and realized it was because the next sequence function wasn't changing the text
+  $("#level-title").text("Level " + level);
 
 
   // Inside the new function generate a new random number between 0 and 3, and store it in a variable called randomNumber
-  var randomNumber = Math.floor(Math.random() * 4);
+  var randomNumber = Math.floor(Math.random() * 6);
 
   // Create a new variable called randomChosenColour and use the randomNumber from step 2 to select a random colour from the buttonColours array.
   var randomChosenColour = buttonColors[randomNumber];
@@ -148,9 +155,6 @@ function nextSequence() {
 
   // Calls the playsound function we made below and passes in the variable for the randomly chosen color as the name variable
   playSound(randomChosenColour);
-
-  // Inside nextSequence(), increase the level by 1 every time nextSequence() is called.
-  level ++;
 
 };
 
